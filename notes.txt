@@ -1,0 +1,33 @@
+redux
+- state management library for js apps
+- can use any library
+
+- we need to keep different parts of ui in sync 
+- solution
+    - store all apps states inside a central repository called the store
+    - ui no longer maintain their own state 
+    - they get it from store 
+- makes it easier to see how the data changes in our application 
+- makes data flow transparent and predictable 
+
+- pro
+    - predictable state changes
+    - centralized state
+    - easy debugging 
+    - easy cache prev state 
+    - undo / redo
+
+- con 
+    - introduces complexity in code 
+    - you have to write boiler plate code to get things done 
+    - 
+
+Is Redux for you?
+- understand what problem you are trying to solve.
+- when not to use 
+    - simple ui data flow
+    - static data 
+    - small to medium size app
+    - on a tight budget 
+- when to use
+    - 
