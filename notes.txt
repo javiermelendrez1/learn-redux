@@ -29,5 +29,69 @@ Is Redux for you?
     - static data 
     - small to medium size app
     - on a tight budget 
-- when to use
-    - 
+- webpack
+    - module bundler for js
+
+- all states are stored in a state tree
+- only way to change the tree is to create a action 
+- action is an obj describing what happened 
+- dispatch action to the tree
+- reducer functions specify how state gets updated in response to action
+    - it will calculate new state based off old state and action
+
+- if the state changes in return a new obj with reducer
+
+What is redux?
+- a pattern and library for managing and updating application state, using events called actions
+- centralizes all states 
+
+why should you use it?
+- makes it easier to understand when where why and how the state of your app is being updated and how your logic will behave
+when changes occurr
+- predictable and testable code 
+- gives confidence code will work as expected 
+
+when to use?
+- when you have many states being used everywhere in large app
+- state is updated frequently 
+- logic to update state may be complex 
+- medium to large size codebase worked on by many people 
+
+TERMS AND CONCEPTS 
+- state management 
+    - state source that drives app
+    - view description of ui based on current state 
+    - actions events that occurr in app based on user input 
+    - the above is called one way data flow 
+- another way to view this is they are all dependent on state 
+
+- immutability 
+    - mutable means changeable 
+    - so if something is immutable it can never change 
+    - to modify things you can not mutate you must make copies of it 
+    and mod the copies 
+    - redux expects all state updates to be done immutable
+
+- actions
+    - js obj
+    - an event that describes something that happened in the action
+    - takes in a type field that is like a string with descriptive name 
+    of action
+
+- action creator 
+    - function that creates and returns an obj
+
+- reducer 
+    - func that receives curren state and and action obj 
+    - decides how to update state and returns a new state
+    - can not modify state directly 
+    - only modify based off action and state 
+    - no async work 
+
+- store 
+    - redux app lives in obj called store 
+
+- dispatch 
+    - only way to update state is to call dispatch and pass in action 
+
+- Selectors 
