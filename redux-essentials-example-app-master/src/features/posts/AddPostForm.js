@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 //import useDispatch 
 import { useDispatch } from 'react-redux'
-//nanoid is to create unique id
-import { nanoid } from '@reduxjs/toolkit'
+
 //import reducer
 import { postAdded } from './postSlice'
 export const AddPostForm = () => {
@@ -18,13 +17,7 @@ export const AddPostForm = () => {
   // to push in the obj
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(
-        postAdded({
-          id: nanoid(),
-          title,
-          content
-        })
-      )
+      dispatch(postAdded(title, content))
 
       setTitle('')
       setContent('')

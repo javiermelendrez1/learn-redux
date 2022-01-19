@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { nanoid } from '@reduxjs/toolkit'
 
 //create an initial state for when the obj loads
 const initialState = [
@@ -14,9 +15,22 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postAdded(state, action) {
+    postAdded: {
+      //the prepare function will set up the action so our component 
+      //does not have to worry about how the payload looks
+      reducer(state, action) {
         state.push(action.payload)
       },
+      prepare(title, content) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            content
+          }
+        }
+      }
+    },
     postUpdated(state,action){
       //second param of action will be obj
       const {id,title,content} = action.payload
