@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //import useDispatch 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 //import reducer
 import { postAdded } from './postSlice'
@@ -10,19 +10,29 @@ export const AddPostForm = () => {
     //they are not used outside of this component
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [userId, setUserId] = useState('')
   const dispatch = useDispatch()
+  const users = useSelector(state => state.users)
   const onTitleChanged = e => setTitle(e.target.value)
   const onContentChanged = e => setContent(e.target.value)
+  const onAuthorChanged = e => setUserId(e.target.value)
   //when user clicks on the button use postAdded 
   // to push in the obj
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(postAdded(title, content))
+      dispatch(postAdded(title, content, userId))
 
       setTitle('')
       setContent('')
     }
   }
+  const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
+
+  const usersOptions = users.map(user => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ))
   return (
     <section>
       <h2>Add a New Post</h2>
@@ -35,6 +45,11 @@ export const AddPostForm = () => {
           value={title}
           onChange={onTitleChanged}
         />
+                <label htmlFor="postAuthor">Author:</label>
+        <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
+          <option value=""></option>
+          {usersOptions}
+        </select>
         <label htmlFor="postContent">Content:</label>
         <textarea
           id="postContent"
@@ -42,7 +57,7 @@ export const AddPostForm = () => {
           value={content}
           onChange={onContentChanged}
         />
-        <button type="button" onClick={onSavePostClicked}>Save Post</button>
+        <button type="button" onClick={onSavePostClicked} disabled={!canSave}>Save Post</button>
       </form>
     </section>
   )

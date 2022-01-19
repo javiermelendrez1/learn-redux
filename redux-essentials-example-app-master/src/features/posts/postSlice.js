@@ -1,10 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { nanoid } from '@reduxjs/toolkit'
-
+import { sub } from 'date-fns'
 //create an initial state for when the obj loads
 const initialState = [
-  { id: '1', title: 'First Post!', content: 'Hello!' },
-  { id: '2', title: 'Second Post', content: 'More text' }
+  {
+    // omitted fields
+    content: 'Hello!',
+    date: sub(new Date(), { minutes: 10 }).toISOString()
+  },
+  {
+    // omitted fields
+    content: 'More text',
+    date: sub(new Date(), { minutes: 5 }).toISOString()
+  }
 ]
 //create a slice
 //pass in inital state and create reducer
@@ -21,12 +29,14 @@ const postsSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload)
       },
-      prepare(title, content) {
+      prepare(title, content, userId) {
         return {
           payload: {
             id: nanoid(),
+            date: new Date().toISOString(),
             title,
-            content
+            content,
+            user: userId
           }
         }
       }
