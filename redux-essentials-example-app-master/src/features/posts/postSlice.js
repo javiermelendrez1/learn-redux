@@ -16,8 +16,21 @@ const postsSlice = createSlice({
   reducers: {
     postAdded(state, action) {
         state.push(action.payload)
+      },
+    postUpdated(state,action){
+      //second param of action will be obj
+      const {id,title,content} = action.payload
+      //save the obj
+      //find find the post
+      const existingPost = state.find(post => post.id === id)
+      //set post attributes to save param values
+      if(existingPost) {
+        existingPost.title = title
+        existingPost.content = content
       }
+    }
   }
 })
-export const { postAdded } = postsSlice.actions
+//export actions
+export const { postAdded, postUpdated } = postsSlice.actions
 export default postsSlice.reducer
